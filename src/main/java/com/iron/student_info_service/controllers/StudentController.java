@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/student")
 public class StudentController {
 
     @Autowired
     private StudentService studentService;
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<?> getStudentById(@PathVariable int id){
         return studentService.getStudentById(id);
     }
