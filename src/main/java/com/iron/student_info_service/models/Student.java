@@ -23,5 +23,7 @@ public class Student {
     @NonNull
     private int age;
 
+    private String courseCode; // el curso al que se han inscrito
+
 
 }
