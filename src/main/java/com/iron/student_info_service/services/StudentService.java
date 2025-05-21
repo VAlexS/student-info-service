@@ -33,8 +33,6 @@ public class StudentService {
             CourseDTO course = restTemplate.getForObject("http://grades-data-service/api/course/ " + student.getCourseCode(),
                     CourseDTO.class);
 
-            /*CourseDTO course = restTemplate.getForObject("http://localhost:8081/api/course/ " + student.getCourseCode(),
-                    CourseDTO.class);*/
 
             StudentResponseDTO response = new StudentResponseDTO(student, course);
 
