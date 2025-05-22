@@ -1,5 +1,6 @@
 package com.iron.student_info_service.services;
 
+import com.iron.student_info_service.clients.UserFeignClient;
 import com.iron.student_info_service.dto.CourseDTO;
 import com.iron.student_info_service.dto.StudentResponseDTO;
 import com.iron.student_info_service.models.Student;
@@ -22,6 +23,9 @@ public class StudentService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private UserFeignClient userFeignClient;
+
 
     public ResponseEntity<?> getStudentById(int id){
         Optional<Student> foundStudent = studentRepository.findById(id);
@@ -30,8 +34,8 @@ public class StudentService {
 
             Student student = foundStudent.get();
 
-            CourseDTO course = restTemplate.getForObject("http://grades-data-service/api/course/ " + student.getCourseCode(),
-                    CourseDTO.class);
+
+            CourseDTO course = userFeignClient.getCourseByCourseCode(student.getCourseCode());
 
 
             StudentResponseDTO response = new StudentResponseDTO(student, course);
